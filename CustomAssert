@@ -1,0 +1,59 @@
+package com.crm.qa.customAssert;
+
+import java.util.Calendar;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+
+public class CustomAssert extends Assert{
+
+	public static void VerifyEquals(String actual, String expected)
+	{
+		try {
+			assertEquals(actual , expected);
+		}
+		catch(Error e)
+		{
+			Reporter.log("Error : " + e.getLocalizedMessage() );
+		}
+	}
+	
+	
+	public static void VerifyEquals(int actual , int expected)
+	{
+		try
+		{
+			assertEquals(actual, expected);
+		}
+		catch(Error e)
+		{
+			Reporter.log("Error : " + e.getLocalizedMessage());
+		}
+	}
+	
+	
+	public static void VerifyTrue(Boolean expression, String message)
+	{
+		try
+		{
+			assertTrue(expression, message);
+		}
+		catch(Error e)
+		{
+			Reporter.log("Error: " + e.getLocalizedMessage());
+		}
+	}
+	
+	
+	public static void VerifyFalse(Boolean expression, String message)
+	{
+		try
+		{
+			assertFalse(expression, message);			
+		}
+		catch(Error e)
+		{
+			
+		}
+	}
+}
