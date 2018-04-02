@@ -1,0 +1,22 @@
+log.info testRunner.testCase.name
+log.info testRunner.testCase.testSuite.name
+log.info testRunner.testCase.testSuite.project.name
+log.info testRunner.testCase.
+					testSuite.
+						project.
+							workspace.
+								getProjectByName('REST Project 2').
+								getTestSuiteByName('Validate iso2 and iso3 responses').
+								getTestCaseByName('compare iso2 code and iso3 code').name
+
+def suiteMap = testRunner.testCase.testSuite.project.workspace.projects
+suiteMap.each
+{
+projectvalues->
+	log.info "the key is $projectvalues.key"
+	log.info "the value is $projectvalues.value"
+}
+def teststep = testRunner.testCase.getTestStepByName('addPet - Request 1')
+def response =	teststep.run(testRunner,context)
+log.info response
+
