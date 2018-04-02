@@ -1,0 +1,68 @@
+package com.crm.qa.pages;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import com.crm.qa.base.TestBase;
+
+
+public class LoginPage extends TestBase{
+	
+// Page Factory Or Object Repository
+	@FindBy(name="username")
+	WebElement username;
+	@FindBy(name="password")
+	WebElement password;
+	@FindBy(xpath="//input[@value='Login']")
+	WebElement loginBtn;
+	@FindBy(xpath="//button[contains (text() , 'Sign Up')]")
+	public WebElement signUpBtn;
+	@FindBy(xpath="//small[contains(text(),'Forgot Password?')]")
+	WebElement forgotPassword;
+	@FindBy(xpath="//img[contains(@src,'https://d19rqa8v8yb76c.cloudfront.net/img/freecrm.jpg')]")
+	WebElement freeCRMLogo;
+	@FindBy(xpath = "//iframe[@class='intercom-borderless-frame']")
+	WebElement loginpageframe;
+	@FindBy(xpath="//div[@class='intercom-borderless-dismiss-button']")
+	WebElement dismissButton;
+	//@FindBy(xpath="//div[@class='intercom-chat-card-author']")WebElement popUp;
+
+	
+	//Initializing the page factory
+	public LoginPage()
+	{
+		PageFactory.initElements(driver, this);
+		handleAlert();
+		
+	}
+	
+	
+	//Actions
+	
+	public  void handleAlert()
+	{
+		driver.switchTo().frame(loginpageframe);
+		dismissButton.click();
+		driver.switchTo().defaultContent();
+		}
+	
+	
+	public String validateLoginpageTitle()
+	{
+		System.out.println(driver.getTitle());
+		return driver.getTitle();
+	}
+	
+	public boolean ValidateCRMImage()
+	{
+		System.out.println(freeCRMLogo.isDisplayed());
+		return freeCRMLogo.isDisplayed();
+	}
+	
+	public HomePage login(String uname, String pwd)
+	{	
+		username.sendKeys(uname);
+		password.sendKeys(pwd);
+		loginBtn.click();
+		return new HomePage();
+	}
+}
